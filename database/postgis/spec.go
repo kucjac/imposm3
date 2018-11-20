@@ -172,12 +172,22 @@ func NewTableSpec(pg *PostGIS, t *config.Table) (*TableSpec, error) {
 
 		h3, isH3Type := pgType.(*h3GeometryType)
 		if isH3Type {
-			res, ok := column.Args["indexed_resolutions"]
+			res, ok := column.Args["resolutions"]
 			if !ok {
-				log.Printf("Table: %s, Column: %s. No indexed resolutions found. Indexing default resolution: '%v'", defaultH3Resolution)
+				log.Printf("Table: %s, Column: %s. No indexed resolutions found. Indexing default resolution: '%v'", t.Name, column.Name, defaultH3Resolution)
 				h3.indexedResolutions = append(h3.indexedResolutions, defaultH3Resolution)
 			} else {
 				switch r := res.(type) {
+				case []interface{}:
+					for _, i := range r {
+						resolution, ok := i.(int)
+						if !ok {
+							return nil, errors.Errorf("One of the provided resoliutions is not an integer: %v.", i)
+						}
+						resolution = checkResolution(resolution)
+						h3.indexedResolutions = append(h3.indexedResolutions, int8(resolution))
+
+					}
 				case []int:
 					for i := range r {
 						resolution := r[i]

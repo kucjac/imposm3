@@ -218,21 +218,23 @@ func createIndex(pg *PostGIS, tableName string, columns []ColumnSpec) error {
 				}
 
 				for _, res := range h3Geom.indexedResolutions {
-					var sql string = fmt.Sprintf(`CREATE INDEX "%s_h3_geom_%d" ON "%s"."%s" `, tableName, res, pg.Config.ImportSchema, tableName)
+					var indexName string = fmt.Sprintf(`"%s_h3_geom_%d"`, tableName, res)
+
+					var sql string = fmt.Sprintf(`CREATE INDEX %s ON "%s"."%s" `, indexName, pg.Config.ImportSchema, tableName)
 					switch pg.Config.Srid {
 					case 4326:
-						sql += fmt.Sprintf(`h3_geo_to_h3index(%s, %d))`, col.Name, res)
+						sql += fmt.Sprintf(`(h3_geo_to_h3index(%s, %d))`, col.Name, res)
 					case 3857:
-						sql += fmt.Sprintf(`h3_geo_to_h3index(ST_TRANSFORM(ST_SetSRID(%s,3857),4326),%d)`, col.Name, res)
+						sql += fmt.Sprintf(`(h3_geo_to_h3index(ST_TRANSFORM(ST_SetSRID(%s,3857),4326),%d))`, col.Name, res)
 					default:
 						return errors.Errorf("Invalid SRID provided: %v", pg.Config.Srid)
 					}
 
-					step := log.Step(fmt.Sprintf("Creating h3_geometry index on %s with resolution %d", tableName, res))
+					step := log.Step(fmt.Sprintf("Creating %s index on table: '%s' with resolution %d and SRID: '%d'\nSql: '%s'", indexName, tableName, res, pg.Config.Srid, sql))
 					_, err := pg.Db.Exec(sql)
 					step()
 					if err != nil {
-						return err
+						return errors.Wrapf(err, "Creating index: '%s' within table: '%s' on column: '%s' failed.", indexName, tableName, col.Name)
 					}
 
 				}

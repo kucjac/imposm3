@@ -81,7 +81,7 @@ func init() {
 		"hstore_string":      &simpleColumnType{"HSTORE"},
 		"geometry":           &geometryType{"GEOMETRY"},
 		"validated_geometry": &validatedGeometryType{geometryType{"GEOMETRY"}},
-		"h3geometry":         &h3GeometryType{geometryType: geometryType{"GEOMETRY"}},
+		"h3_geometry":        &h3GeometryType{geometryType: geometryType{"GEOMETRY"}},
 	}
 }
 

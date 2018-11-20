@@ -229,3 +229,22 @@ There is a Makefile that creates all test files if necessary and then runs the t
 Call `make test-system` to skip the unit tests.
 
 WARNING: It uses your local PostgreSQL database (`imposm_test_import`, `imposm_test_production` and `imposm_test_backup` schema). Change the database with the standard `PGDATABASE`, `PGHOST`, etc. environment variables.
+
+## UBER-H3 Geometry Type ##
+
+This fork adds the possibility to add a geometry::point type with the [Postgres H3 Extension](https://github.com/dlr-eoc/pgh3). 
+The H3-Geometry type adds the table indexes for the provided resolutions. I.e. 
+providing mapping with some data:
+```
+...
+type: h3_geometry
+name: geom
+args:
+  resolution:
+    - 8
+    - 9
+    - 10
+...
+
+```
+This would result with the postgres indexes on getting h3_geo_to_h3index(geom, `resolution`) for `resolution in range (8 - 10).
