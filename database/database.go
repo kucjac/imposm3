@@ -4,10 +4,10 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/geom"
-	"github.com/omniscale/imposm3/mapping"
-	"github.com/omniscale/imposm3/mapping/config"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/geom"
+	"github.com/kucjac/imposm3/mapping"
+	"github.com/kucjac/imposm3/mapping/config"
 )
 
 type Config struct {

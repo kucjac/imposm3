@@ -6,15 +6,15 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/omniscale/imposm3/cache"
+	"github.com/kucjac/imposm3/cache"
 
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/geom"
-	"github.com/omniscale/imposm3/proj"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/geom"
+	"github.com/kucjac/imposm3/proj"
 
 	"testing"
 
-	"github.com/omniscale/imposm3/geom/geos"
+	"github.com/kucjac/imposm3/geom/geos"
 )
 
 func TestComplete(t *testing.T) {
@@ -344,7 +344,7 @@ func TestComplete(t *testing.T) {
 		ts.assertGeomValid(t, checkElem{"osm_landusages", -7301, Missing, nil})
 		// but not way
 		ts.assertRecords(t, []checkElem{
-			checkElem{"osm_landusages", 7311, Missing, nil},
+			{"osm_landusages", 7311, Missing, nil},
 		})
 	})
 

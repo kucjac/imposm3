@@ -11,7 +11,7 @@ import (
 
 	"testing"
 
-	"github.com/omniscale/imposm3/geom/geos"
+	"github.com/kucjac/imposm3/geom/geos"
 )
 
 func TestExpireTiles(t *testing.T) {
@@ -176,7 +176,7 @@ func TestExpireTiles(t *testing.T) {
 		if len(tiles) > 0 {
 			t.Errorf("found %d unexpected tiles", len(tiles))
 		}
-		for tile, _ := range tiles {
+		for tile := range tiles {
 			t.Errorf("unexpected tile expired: %v", tile)
 		}
 	})

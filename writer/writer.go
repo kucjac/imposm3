@@ -4,13 +4,13 @@ import (
 	"runtime"
 	"sync"
 
-	"github.com/omniscale/imposm3/cache"
-	"github.com/omniscale/imposm3/database"
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/expire"
-	"github.com/omniscale/imposm3/geom/limit"
-	"github.com/omniscale/imposm3/proj"
-	"github.com/omniscale/imposm3/stats"
+	"github.com/kucjac/imposm3/cache"
+	"github.com/kucjac/imposm3/database"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/expire"
+	"github.com/kucjac/imposm3/geom/limit"
+	"github.com/kucjac/imposm3/proj"
+	"github.com/kucjac/imposm3/stats"
 )
 
 type ErrorLevel interface {

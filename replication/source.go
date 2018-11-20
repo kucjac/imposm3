@@ -13,8 +13,8 @@ import (
 
 	"gopkg.in/fsnotify.v1"
 
-	"github.com/omniscale/imposm3"
-	"github.com/omniscale/imposm3/log"
+	"github.com/kucjac/imposm3"
+	"github.com/kucjac/imposm3/log"
 )
 
 type NotAvailable struct {

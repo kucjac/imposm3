@@ -4,8 +4,8 @@ import (
 	"path"
 	"strings"
 
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/mapping/config"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/mapping/config"
 )
 
 type TagFilterer interface {
@@ -45,9 +45,9 @@ func (m *Mapping) RelationTagFilter() TagFilterer {
 	mappings := make(TagTableMapping)
 	// do not filter out type tag for common relations
 	mappings["type"] = map[Value][]orderedDestTable{
-		"multipolygon": []orderedDestTable{},
-		"boundary":     []orderedDestTable{},
-		"land_area":    []orderedDestTable{},
+		"multipolygon": {},
+		"boundary":     {},
+		"land_area":    {},
 	}
 	m.mappings(LineStringTable, mappings)
 	m.mappings(PolygonTable, mappings)

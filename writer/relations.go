@@ -4,15 +4,15 @@ import (
 	"sync"
 	"time"
 
-	"github.com/omniscale/imposm3/cache"
-	"github.com/omniscale/imposm3/database"
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/expire"
-	geomp "github.com/omniscale/imposm3/geom"
-	geosp "github.com/omniscale/imposm3/geom/geos"
-	"github.com/omniscale/imposm3/log"
-	"github.com/omniscale/imposm3/mapping"
-	"github.com/omniscale/imposm3/stats"
+	"github.com/kucjac/imposm3/cache"
+	"github.com/kucjac/imposm3/database"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/expire"
+	geomp "github.com/kucjac/imposm3/geom"
+	geosp "github.com/kucjac/imposm3/geom/geos"
+	"github.com/kucjac/imposm3/log"
+	"github.com/kucjac/imposm3/mapping"
+	"github.com/kucjac/imposm3/stats"
 )
 
 type RelationWriter struct {

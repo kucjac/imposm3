@@ -6,13 +6,13 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/omniscale/imposm3"
-	"github.com/omniscale/imposm3/cache/query"
-	"github.com/omniscale/imposm3/config"
-	"github.com/omniscale/imposm3/import_"
-	"github.com/omniscale/imposm3/log"
-	"github.com/omniscale/imposm3/stats"
-	"github.com/omniscale/imposm3/update"
+	"github.com/kucjac/imposm3"
+	"github.com/kucjac/imposm3/cache/query"
+	"github.com/kucjac/imposm3/config"
+	"github.com/kucjac/imposm3/import_"
+	"github.com/kucjac/imposm3/log"
+	"github.com/kucjac/imposm3/stats"
+	"github.com/kucjac/imposm3/update"
 )
 
 func PrintCmds() {

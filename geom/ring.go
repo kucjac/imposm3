@@ -1,8 +1,8 @@
 package geom
 
 import (
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/geom/geos"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/geom/geos"
 )
 
 type ring struct {
@@ -119,7 +119,7 @@ func mergeRings(rings []*ring) []*ring {
 		uniqueRings[ring] = true
 	}
 	result := make([]*ring, 0, len(uniqueRings))
-	for ring, _ := range uniqueRings {
+	for ring := range uniqueRings {
 		result = append(result, ring)
 	}
 	return result

@@ -4,9 +4,9 @@ import (
 	"io/ioutil"
 	"regexp"
 
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/log"
-	"github.com/omniscale/imposm3/mapping/config"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/log"
+	"github.com/kucjac/imposm3/mapping/config"
 
 	"github.com/pkg/errors"
 	"gopkg.in/yaml.v2"

@@ -8,14 +8,14 @@ import (
 	"strings"
 	"sync"
 
-	osmcache "github.com/omniscale/imposm3/cache"
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/geom/geos"
-	"github.com/omniscale/imposm3/geom/limit"
-	"github.com/omniscale/imposm3/log"
-	"github.com/omniscale/imposm3/mapping"
-	"github.com/omniscale/imposm3/parser/pbf"
-	"github.com/omniscale/imposm3/stats"
+	osmcache "github.com/kucjac/imposm3/cache"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/geom/geos"
+	"github.com/kucjac/imposm3/geom/limit"
+	"github.com/kucjac/imposm3/log"
+	"github.com/kucjac/imposm3/mapping"
+	"github.com/kucjac/imposm3/parser/pbf"
+	"github.com/kucjac/imposm3/stats"
 )
 
 var skipCoords, skipNodes, skipWays bool
@@ -115,7 +115,7 @@ func ReadPbf(
 				if skipWays {
 					continue
 				}
-				for i, _ := range ws {
+				for i := range ws {
 					m.Filter(&ws[i].Tags)
 					if withLimiter {
 						cached, err := cache.Coords.FirstRefIsCached(ws[i].Refs)
@@ -150,7 +150,7 @@ func ReadPbf(
 			m := tagmapping.RelationTagFilter()
 			for rels := range relations {
 				numWithTags := 0
-				for i, _ := range rels {
+				for i := range rels {
 					m.Filter(&rels[i].Tags)
 					if len(rels[i].Tags) > 0 {
 						numWithTags += 1
@@ -197,7 +197,7 @@ func ReadPbf(
 					continue
 				}
 				if withLimiter {
-					for i, _ := range nds {
+					for i := range nds {
 						if !limiter.IntersectsBuffer(g, nds[i].Long, nds[i].Lat) {
 							skip += 1
 							nds[i].Id = osmcache.SKIP
@@ -230,7 +230,7 @@ func ReadPbf(
 					continue
 				}
 				numWithTags := 0
-				for i, _ := range nds {
+				for i := range nds {
 					m.Filter(&nds[i].Tags)
 					if len(nds[i].Tags) > 0 {
 						numWithTags += 1

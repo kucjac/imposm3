@@ -9,9 +9,9 @@ import (
 
 	"github.com/jmhodges/levigo"
 
-	"github.com/omniscale/imposm3/cache/binary"
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/log"
+	"github.com/kucjac/imposm3/cache/binary"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/log"
 )
 
 type DiffCache struct {
@@ -514,7 +514,7 @@ func (index *bunchRefCache) writeRefs(idRefs idRefBunches) error {
 	}
 
 	go func() {
-		for k, _ := range idRefs {
+		for k := range idRefs {
 			delete(idRefs, k)
 		}
 		select {

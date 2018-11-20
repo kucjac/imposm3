@@ -3,8 +3,8 @@ package geom
 import (
 	"testing"
 
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/geom/geos"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/geom/geos"
 )
 
 func TestLineString(t *testing.T) {
@@ -25,10 +25,10 @@ func TestLineString(t *testing.T) {
 
 func TestPolygon(t *testing.T) {
 	nodes := []element.Node{
-		element.Node{Lat: 0, Long: 0},
-		element.Node{Lat: 0, Long: 10},
-		element.Node{Lat: 10, Long: 10},
-		element.Node{Lat: 0, Long: 0},
+		{Lat: 0, Long: 0},
+		{Lat: 0, Long: 10},
+		{Lat: 10, Long: 10},
+		{Lat: 0, Long: 0},
 	}
 	g := geos.NewGeos()
 	defer g.Finish()
@@ -44,9 +44,9 @@ func TestPolygon(t *testing.T) {
 
 func TestPolygonNotClosed(t *testing.T) {
 	nodes := []element.Node{
-		element.Node{Lat: 0, Long: 0},
-		element.Node{Lat: 0, Long: 10},
-		element.Node{Lat: 10, Long: 10},
+		{Lat: 0, Long: 0},
+		{Lat: 0, Long: 10},
+		{Lat: 10, Long: 10},
 	}
 	g := geos.NewGeos()
 	defer g.Finish()
@@ -58,11 +58,11 @@ func TestPolygonNotClosed(t *testing.T) {
 
 func TestPolygonIntersection(t *testing.T) {
 	nodes := []element.Node{
-		element.Node{Lat: 0, Long: 0},
-		element.Node{Lat: 0, Long: 10},
-		element.Node{Lat: 10, Long: 10},
-		element.Node{Lat: 10, Long: 0},
-		element.Node{Lat: 0, Long: 0},
+		{Lat: 0, Long: 0},
+		{Lat: 0, Long: 10},
+		{Lat: 10, Long: 10},
+		{Lat: 10, Long: 0},
+		{Lat: 0, Long: 0},
 	}
 	g := geos.NewGeos()
 	defer g.Finish()
@@ -148,49 +148,49 @@ func TestUnduplicateNodes(t *testing.T) {
 	var nodes []element.Node
 
 	nodes = []element.Node{
-		element.Node{Lat: 0, Long: 0},
+		{Lat: 0, Long: 0},
 	}
 	if res := unduplicateNodes(nodes); len(res) != 1 {
 		t.Fatal(res)
 	}
 	nodes = []element.Node{
-		element.Node{Lat: 47.0, Long: 80.0},
-		element.Node{Lat: 47.0, Long: 80.0},
+		{Lat: 47.0, Long: 80.0},
+		{Lat: 47.0, Long: 80.0},
 	}
 	if res := unduplicateNodes(nodes); len(res) != 1 {
 		t.Fatal(res)
 	}
 
 	nodes = []element.Node{
-		element.Node{Lat: 0, Long: -10},
-		element.Node{Lat: 0, Long: -10},
-		element.Node{Lat: 0, Long: -10},
-		element.Node{Lat: 10, Long: 10},
-		element.Node{Lat: 10, Long: 10},
-		element.Node{Lat: 10, Long: 10},
+		{Lat: 0, Long: -10},
+		{Lat: 0, Long: -10},
+		{Lat: 0, Long: -10},
+		{Lat: 10, Long: 10},
+		{Lat: 10, Long: 10},
+		{Lat: 10, Long: 10},
 	}
 	if res := unduplicateNodes(nodes); len(res) != 2 {
 		t.Fatal(res)
 	}
 
 	nodes = []element.Node{
-		element.Node{Lat: 10, Long: 10},
-		element.Node{Lat: 0, Long: 10},
-		element.Node{Lat: 10, Long: 10},
-		element.Node{Lat: 10, Long: 10},
-		element.Node{Lat: 0, Long: 10},
-		element.Node{Lat: 0, Long: 10},
+		{Lat: 10, Long: 10},
+		{Lat: 0, Long: 10},
+		{Lat: 10, Long: 10},
+		{Lat: 10, Long: 10},
+		{Lat: 0, Long: 10},
+		{Lat: 0, Long: 10},
 	}
 	if res := unduplicateNodes(nodes); len(res) != 4 {
 		t.Fatal(res)
 	}
 
 	nodes = []element.Node{
-		element.Node{Lat: 0, Long: 0},
-		element.Node{Lat: 0, Long: -10},
-		element.Node{Lat: 10, Long: -10},
-		element.Node{Lat: 10, Long: 0},
-		element.Node{Lat: 0, Long: 0},
+		{Lat: 0, Long: 0},
+		{Lat: 0, Long: -10},
+		{Lat: 10, Long: -10},
+		{Lat: 10, Long: 0},
+		{Lat: 0, Long: 0},
 	}
 	if res := unduplicateNodes(nodes); len(res) != 5 {
 		t.Fatal(res)

@@ -1,12 +1,12 @@
 package update
 
 import (
-	"github.com/omniscale/imposm3/cache"
-	"github.com/omniscale/imposm3/database"
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/expire"
-	"github.com/omniscale/imposm3/mapping"
-	"github.com/omniscale/imposm3/parser/diff"
+	"github.com/kucjac/imposm3/cache"
+	"github.com/kucjac/imposm3/database"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/expire"
+	"github.com/kucjac/imposm3/mapping"
+	"github.com/kucjac/imposm3/parser/diff"
 )
 
 type Deleter struct {

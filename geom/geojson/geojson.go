@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/omniscale/imposm3/log"
+	"github.com/kucjac/imposm3/log"
 )
 
 type object struct {
@@ -150,7 +150,7 @@ func constructPolygonFeatures(obj *object) ([]Feature, error) {
 			return nil, err
 		}
 		properties := stringProperties(obj.Properties)
-		for i, _ := range features {
+		for i := range features {
 			features[i].Properties = properties
 		}
 		return features, err

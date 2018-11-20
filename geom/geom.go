@@ -4,8 +4,8 @@ import (
 	"errors"
 	"math"
 
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/geom/geos"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/geom/geos"
 )
 
 type GeomError struct {

@@ -13,8 +13,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/omniscale/imposm3/log"
-	"github.com/omniscale/imposm3/parser/pbf"
+	"github.com/kucjac/imposm3/log"
+	"github.com/kucjac/imposm3/parser/pbf"
 )
 
 type DiffState struct {

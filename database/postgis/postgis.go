@@ -8,13 +8,13 @@ import (
 	"sync"
 	"sync/atomic"
 
+	"github.com/kucjac/imposm3/database"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/geom"
+	"github.com/kucjac/imposm3/log"
+	"github.com/kucjac/imposm3/mapping"
+	"github.com/kucjac/imposm3/mapping/config"
 	pq "github.com/lib/pq"
-	"github.com/omniscale/imposm3/database"
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/geom"
-	"github.com/omniscale/imposm3/log"
-	"github.com/omniscale/imposm3/mapping"
-	"github.com/omniscale/imposm3/mapping/config"
 	"github.com/pkg/errors"
 )
 
@@ -195,18 +195,60 @@ func (pg *PostGIS) Finish() error {
 	return nil
 }
 
+func isH3(tx *sql.DB) error {
+	sql := fmt.Sprintf("SELECT h3_ext_version();")
+	row := tx.QueryRow(sql)
+	var version string
+	return row.Scan(&version)
+
+}
+
 func createIndex(pg *PostGIS, tableName string, columns []ColumnSpec) error {
 	for _, col := range columns {
+
 		if col.Type.Name() == "GEOMETRY" {
-			sql := fmt.Sprintf(`CREATE INDEX "%s_geom" ON "%s"."%s" USING GIST ("%s")`,
-				tableName, pg.Config.ImportSchema, tableName, col.Name)
-			step := log.Step(fmt.Sprintf("Creating geometry index on %s", tableName))
-			_, err := pg.Db.Exec(sql)
-			step()
-			if err != nil {
-				return err
+			h3Geom, isH3Geom := col.Type.(*h3GeometryType)
+			if isH3Geom {
+				err := isH3(pg.Db)
+				if err != nil {
+					return errors.Wrapf(err, "Table: '%s' Column: '%s'. The H3 extension is not setup.", tableName, col.Name)
+				}
+				if len(h3Geom.indexedResolutions) == 0 {
+					h3Geom.indexedResolutions = append(h3Geom.indexedResolutions, defaultH3Resolution)
+				}
+
+				for _, res := range h3Geom.indexedResolutions {
+					var sql string = fmt.Sprintf(`CREATE INDEX "%s_h3_geom_%d" ON "%s"."%s" `, tableName, res, pg.Config.ImportSchema, tableName)
+					switch pg.Config.Srid {
+					case 4326:
+						sql += fmt.Sprintf(`h3_geo_to_h3index(%s, %d))`, col.Name, res)
+					case 3857:
+						sql += fmt.Sprintf(`h3_geo_to_h3index(ST_TRANSFORM(ST_SetSRID(%s,3857),4326),%d)`, col.Name, res)
+					default:
+						return errors.Errorf("Invalid SRID provided: %v", pg.Config.Srid)
+					}
+
+					step := log.Step(fmt.Sprintf("Creating h3_geometry index on %s with resolution %d", tableName, res))
+					_, err := pg.Db.Exec(sql)
+					step()
+					if err != nil {
+						return err
+					}
+
+				}
+
+			} else {
+				sql := fmt.Sprintf(`CREATE INDEX "%s_geom" ON "%s"."%s" USING GIST ("%s")`,
+					tableName, pg.Config.ImportSchema, tableName, col.Name)
+				step := log.Step(fmt.Sprintf("Creating geometry index on %s", tableName))
+				_, err := pg.Db.Exec(sql)
+				step()
+				if err != nil {
+					return err
+				}
 			}
 		}
+
 		if col.FieldType.Name == "id" {
 			sql := fmt.Sprintf(`CREATE INDEX "%s_%s_idx" ON "%s"."%s" USING BTREE ("%s")`,
 				tableName, col.Name, pg.Config.ImportSchema, tableName, col.Name)

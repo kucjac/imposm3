@@ -5,7 +5,7 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/omniscale/imposm3/element"
+	"github.com/kucjac/imposm3/element"
 )
 
 func TestTagsAsAndFromArray(t *testing.T) {

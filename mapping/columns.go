@@ -6,11 +6,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/omniscale/imposm3/log"
-
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/geom"
-	"github.com/omniscale/imposm3/mapping/config"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/geom"
+	"github.com/kucjac/imposm3/log"
+	"github.com/kucjac/imposm3/mapping/config"
 	"github.com/pkg/errors"
 )
 
@@ -32,6 +31,7 @@ func init() {
 		"member_index":         {"member_index", "int32", nil, nil, RelationMemberIndex, true},
 		"geometry":             {"geometry", "geometry", Geometry, nil, nil, false},
 		"validated_geometry":   {"validated_geometry", "validated_geometry", Geometry, nil, nil, false},
+		"h3_geometry":          {"h3_geometry", "h3_geometry", H3Geometry, nil, nil, false},
 		"hstore_tags":          {"hstore_tags", "hstore_string", nil, MakeHStoreString, nil, false},
 		"wayzorder":            {"wayzorder", "int32", nil, MakeWayZOrder, nil, false},
 		"pseudoarea":           {"pseudoarea", "float32", nil, MakePseudoArea, nil, false},
@@ -132,6 +132,35 @@ func Direction(val string, elem *element.OSMElem, geom *geom.Geometry, match Mat
 func Geometry(val string, elem *element.OSMElem, geom *geom.Geometry, match Match) interface{} {
 	return string(geom.Wkb)
 }
+
+func H3Geometry(val string, elem *element.OSMElem, geom *geom.Geometry, match Match) interface{} {
+	return string(geom.Wkb)
+}
+
+// func MakeH3Geometry(
+// 	columnName string,
+// 	columnType ColumnType,
+// 	column config.Column,
+// ) (MakeValue, error) {
+// 	defaultResolution := 5
+// 	resolution, ok := column.Args["resolution"]
+// 	if !ok {
+// 		return DefaultH3Geometry, nil
+// 	}
+
+// 	intResolution, ok := resolution.(int)
+// 	if !ok {
+// 		return nil, errors.New("resoultion in args it not an integer")
+// 	}
+
+// 	h3Geom := func(val string, elem *element.OSMElem, gm *geom.Geometry, match Match) interface{} {
+// 		b := gm.Geom.Bounds()
+
+// 		return string(gm.Wkb)
+// 	}
+// 	return h3Geom, nil
+
+// }
 
 func MakePseudoArea(columnName string, columnType ColumnType, column config.Column) (MakeValue, error) {
 	log.Println("[warn] pseudoarea type is deprecated and will be removed. See area and webmerc_area type.")
@@ -256,6 +285,10 @@ func init() {
 		"motorway_link":  3,
 		"motorway":       9,
 	}
+}
+
+func DefaultH3Geometry(val string, elem *element.OSMElem, geom *geom.Geometry, match Match) interface{} {
+	return nil
 }
 
 func DefaultWayZOrder(val string, elem *element.OSMElem, geom *geom.Geometry, match Match) interface{} {
@@ -395,7 +428,7 @@ func MakeSuffixReplace(columnName string, columnType ColumnType, column config.C
 		strChanges[k.(string)] = v.(string)
 	}
 	var suffixes []string
-	for k, _ := range strChanges {
+	for k := range strChanges {
 		suffixes = append(suffixes, k)
 	}
 	reStr := `(` + strings.Join(suffixes, "|") + `)\b`

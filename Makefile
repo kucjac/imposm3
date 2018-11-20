@@ -25,7 +25,7 @@ else
 	# use TAG but strip v of v1.2.3
 	BUILD_VERSION=$(TAG:v%=%)
 endif
-VERSION_LDFLAGS=-X github.com/omniscale/imposm3.Version=$(BUILD_VERSION)
+VERSION_LDFLAGS=-X github.com/kucjac/imposm3.Version=$(BUILD_VERSION)
 
 all: build test
 
@@ -53,7 +53,7 @@ system-test-files:
 regen-protobuf: $(PBGOFILES)
 
 %.pb.go: %.proto
-	protoc --proto_path=$(GOPATH)/src:$(GOPATH)/src/github.com/omniscale/imposm3/vendor/github.com/gogo/protobuf/protobuf:. --gogofaster_out=. $^
+	protoc --proto_path=$(GOPATH)/src:$(GOPATH)/src/github.com/kucjac/imposm3/vendor/github.com/gogo/protobuf/protobuf:. --gogofaster_out=. $^
 
 docs:
 	(cd docs && make html)

@@ -128,7 +128,7 @@ deploy:
   file: /tmp/imposm-${BUILD_VERSION}.tar.gz
   skip_cleanup: true
   on:
-    repo: omniscale/imposm3
+    repo: kucjac/imposm3
     tags: true
     condition: $TRAVIS_GO_VERSION =~ ^1\.10(\.[0-9]+)?$
 

@@ -7,13 +7,13 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/omniscale/imposm3/cache"
-	"github.com/omniscale/imposm3/config"
-	"github.com/omniscale/imposm3/expire"
-	"github.com/omniscale/imposm3/geom/limit"
-	"github.com/omniscale/imposm3/log"
-	"github.com/omniscale/imposm3/replication"
-	"github.com/omniscale/imposm3/update/state"
+	"github.com/kucjac/imposm3/cache"
+	"github.com/kucjac/imposm3/config"
+	"github.com/kucjac/imposm3/expire"
+	"github.com/kucjac/imposm3/geom/limit"
+	"github.com/kucjac/imposm3/log"
+	"github.com/kucjac/imposm3/replication"
+	"github.com/kucjac/imposm3/update/state"
 )
 
 func Run(baseOpts config.Base) {

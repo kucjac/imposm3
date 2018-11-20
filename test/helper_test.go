@@ -9,13 +9,13 @@ import (
 
 	"github.com/lib/pq/hstore"
 
-	"github.com/omniscale/imposm3/cache"
-	"github.com/omniscale/imposm3/config"
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/geom/geos"
-	"github.com/omniscale/imposm3/import_"
-	"github.com/omniscale/imposm3/log"
-	"github.com/omniscale/imposm3/update"
+	"github.com/kucjac/imposm3/cache"
+	"github.com/kucjac/imposm3/config"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/geom/geos"
+	"github.com/kucjac/imposm3/import_"
+	"github.com/kucjac/imposm3/log"
+	"github.com/kucjac/imposm3/update"
 )
 
 type importConfig struct {
@@ -343,7 +343,7 @@ type checkElem struct {
 func (ts *importTestSuite) assertRecords(t *testing.T, elems []checkElem) {
 	for _, e := range elems {
 		keys := make([]string, 0, len(e.tags))
-		for k, _ := range e.tags {
+		for k := range e.tags {
 			keys = append(keys, k)
 		}
 		r := ts.query(t, e.table, e.id, keys)

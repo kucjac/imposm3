@@ -5,8 +5,8 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/omniscale/imposm3/cache/binary"
-	"github.com/omniscale/imposm3/element"
+	"github.com/kucjac/imposm3/cache/binary"
+	"github.com/kucjac/imposm3/element"
 )
 
 type byId []element.Node
@@ -115,7 +115,7 @@ func (self *DeltaCoordsCache) Flush() error {
 	}
 
 	self.lruList.Init()
-	for k, _ := range self.table {
+	for k := range self.table {
 		delete(self.table, k)
 	}
 	return nil

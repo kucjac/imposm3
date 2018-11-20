@@ -1,8 +1,8 @@
 package mapping
 
 import (
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/geom"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/geom"
 )
 
 func (m *Mapping) pointMatcher() (NodeMatcher, error) {

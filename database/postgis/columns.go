@@ -3,7 +3,7 @@ package postgis
 import (
 	"fmt"
 
-	"github.com/omniscale/imposm3/log"
+	"github.com/kucjac/imposm3/log"
 )
 
 type ColumnType interface {
@@ -63,6 +63,11 @@ func (t *validatedGeometryType) GeneralizeSql(colSpec *ColumnSpec, spec *General
 	)
 }
 
+type h3GeometryType struct {
+	geometryType
+	indexedResolutions []int8
+}
+
 var pgTypes map[string]ColumnType
 
 func init() {
@@ -76,5 +81,8 @@ func init() {
 		"hstore_string":      &simpleColumnType{"HSTORE"},
 		"geometry":           &geometryType{"GEOMETRY"},
 		"validated_geometry": &validatedGeometryType{geometryType{"GEOMETRY"}},
+		"h3geometry":         &h3GeometryType{geometryType: geometryType{"GEOMETRY"}},
 	}
 }
+
+var defaultH3Resolution int8 = 5

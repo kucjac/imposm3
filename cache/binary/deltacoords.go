@@ -3,7 +3,7 @@ package binary
 import (
 	"encoding/binary"
 	"errors"
-	"github.com/omniscale/imposm3/element"
+	"github.com/kucjac/imposm3/element"
 )
 
 func MarshalDeltaNodes(nodes []element.Node, buf []byte) []byte {

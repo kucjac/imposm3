@@ -12,8 +12,8 @@ import (
 
 	"github.com/gogo/protobuf/proto"
 
-	"github.com/omniscale/imposm3/log"
-	"github.com/omniscale/imposm3/parser/pbf/internal/osmpbf"
+	"github.com/kucjac/imposm3/log"
+	"github.com/kucjac/imposm3/parser/pbf/internal/osmpbf"
 )
 
 type block struct {

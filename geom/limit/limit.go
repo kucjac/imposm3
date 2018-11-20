@@ -7,10 +7,10 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/omniscale/imposm3/geom/geojson"
-	"github.com/omniscale/imposm3/geom/geos"
-	"github.com/omniscale/imposm3/log"
-	"github.com/omniscale/imposm3/proj"
+	"github.com/kucjac/imposm3/geom/geojson"
+	"github.com/kucjac/imposm3/geom/geos"
+	"github.com/kucjac/imposm3/log"
+	"github.com/kucjac/imposm3/proj"
 )
 
 // Tile bbox into multiple sub-boxes, each of `width` size.

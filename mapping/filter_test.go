@@ -4,8 +4,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/mapping/config"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/mapping/config"
 )
 
 func TestTagFilterNodes(t *testing.T) {

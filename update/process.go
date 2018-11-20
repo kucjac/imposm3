@@ -6,20 +6,20 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/omniscale/imposm3/cache"
-	"github.com/omniscale/imposm3/config"
-	"github.com/omniscale/imposm3/database"
-	_ "github.com/omniscale/imposm3/database/postgis"
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/expire"
-	"github.com/omniscale/imposm3/geom/geos"
-	"github.com/omniscale/imposm3/geom/limit"
-	"github.com/omniscale/imposm3/log"
-	"github.com/omniscale/imposm3/mapping"
-	"github.com/omniscale/imposm3/parser/diff"
-	"github.com/omniscale/imposm3/stats"
-	diffstate "github.com/omniscale/imposm3/update/state"
-	"github.com/omniscale/imposm3/writer"
+	"github.com/kucjac/imposm3/cache"
+	"github.com/kucjac/imposm3/config"
+	"github.com/kucjac/imposm3/database"
+	_ "github.com/kucjac/imposm3/database/postgis"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/expire"
+	"github.com/kucjac/imposm3/geom/geos"
+	"github.com/kucjac/imposm3/geom/limit"
+	"github.com/kucjac/imposm3/log"
+	"github.com/kucjac/imposm3/mapping"
+	"github.com/kucjac/imposm3/parser/diff"
+	"github.com/kucjac/imposm3/stats"
+	diffstate "github.com/kucjac/imposm3/update/state"
+	"github.com/kucjac/imposm3/writer"
 )
 
 func Diff(baseOpts config.Base, files []string) {
@@ -314,7 +314,7 @@ func Update(
 	}
 
 	// mark member ways from deleted relations for re-insert
-	for id, _ := range deleter.DeletedMemberWays() {
+	for id := range deleter.DeletedMemberWays() {
 		wayIds[id] = struct{}{}
 	}
 
@@ -325,7 +325,7 @@ func Update(
 	progress = stats.NewStatsReporter()
 
 	// mark depending ways for (re)insert
-	for nodeId, _ := range nodeIds {
+	for nodeId := range nodeIds {
 		dependers := diffCache.Coords.Get(nodeId)
 		for _, way := range dependers {
 			wayIds[way] = struct{}{}
@@ -333,13 +333,13 @@ func Update(
 	}
 
 	// mark depending relations for (re)insert
-	for nodeId, _ := range nodeIds {
+	for nodeId := range nodeIds {
 		dependers := diffCache.CoordsRel.Get(nodeId)
 		for _, rel := range dependers {
 			relIds[rel] = struct{}{}
 		}
 	}
-	for wayId, _ := range wayIds {
+	for wayId := range wayIds {
 		dependers := diffCache.Ways.Get(wayId)
 		// mark depending relations for (re)insert
 		for _, rel := range dependers {
@@ -347,7 +347,7 @@ func Update(
 		}
 	}
 
-	for relId, _ := range relIds {
+	for relId := range relIds {
 		rel, err := osmCache.Relations.GetRelation(relId)
 		if err != nil {
 			if err != cache.NotFound {
@@ -360,7 +360,7 @@ func Update(
 		relations <- rel
 	}
 
-	for wayId, _ := range wayIds {
+	for wayId := range wayIds {
 		way, err := osmCache.Ways.GetWay(wayId)
 		if err != nil {
 			if err != cache.NotFound {
@@ -373,7 +373,7 @@ func Update(
 		ways <- way
 	}
 
-	for nodeId, _ := range nodeIds {
+	for nodeId := range nodeIds {
 		node, err := osmCache.Nodes.GetNode(nodeId)
 		if err != nil {
 			if err != cache.NotFound {

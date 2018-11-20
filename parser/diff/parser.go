@@ -8,8 +8,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/log"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/log"
 )
 
 type Element struct {

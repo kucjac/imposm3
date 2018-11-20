@@ -3,7 +3,7 @@ Data Mapping
 
 The data mapping defines which `OSM feature types <http://wiki.openstreetmap.org/wiki/Map_Features>`_ should be imported in which table. The mapping is a YAML (or JSON) file.
 
-See `example-mapping.yml <https://raw.githubusercontent.com/omniscale/imposm3/master/example-mapping.yml>`_ for an example.
+See `example-mapping.yml <https://raw.githubusercontent.com/kucjac/imposm3/master/example-mapping.yml>`_ for an example.
 
 .. note::
   The `YAML format <https://en.wikipedia.org/wiki/YAML>`_ uses indentations to indicate nesting. Tab characters are not allowed.

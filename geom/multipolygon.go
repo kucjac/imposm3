@@ -4,8 +4,8 @@ import (
 	"errors"
 	"sort"
 
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/geom/geos"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/geom/geos"
 )
 
 type PreparedRelation struct {
@@ -162,9 +162,9 @@ func buildRelGeometry(g *geos.Geos, rel *element.Relation, rings []*ring) (*geos
 	}
 
 	var polygons []*geos.Geom
-	for shell, _ := range shells {
+	for shell := range shells {
 		var interiors []*geos.Geom
-		for hole, _ := range shell.holes {
+		for hole := range shell.holes {
 			ring := g.Clone(g.ExteriorRing(hole.geom))
 			g.Destroy(hole.geom)
 			if ring == nil {

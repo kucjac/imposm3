@@ -9,8 +9,8 @@ import (
 
 	"github.com/gogo/protobuf/proto"
 
-	"github.com/omniscale/imposm3/element"
-	"github.com/omniscale/imposm3/parser/pbf/internal/osmpbf"
+	"github.com/kucjac/imposm3/element"
+	"github.com/kucjac/imposm3/parser/pbf/internal/osmpbf"
 )
 
 func BenchmarkHello(b *testing.B) {
@@ -52,19 +52,19 @@ func BenchmarkParser(b *testing.B) {
 		ways := make(chan []element.Way)
 		relations := make(chan []element.Relation)
 		go func() {
-			for _ = range coords {
+			for range coords {
 			}
 		}()
 		go func() {
-			for _ = range nodes {
+			for range nodes {
 			}
 		}()
 		go func() {
-			for _ = range ways {
+			for range ways {
 			}
 		}()
 		go func() {
-			for _ = range relations {
+			for range relations {
 			}
 		}()
 

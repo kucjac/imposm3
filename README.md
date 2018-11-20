@@ -91,7 +91,7 @@ Installation
 
 ### Binary
 
-[Binary releases are available at GitHub.](https://github.com/omniscale/imposm3/releases)
+[Binary releases are available at GitHub.](https://github.com/kucjac/imposm3/releases)
 
 These builds are for x86 64bit Linux and require *no* further dependencies. Download, untar and start `imposm`.
 Binaries are compatible with Debian 8, Ubuntu 14.04 and SLES 12 (and newer versions). Older Imposm binaries (<=0.4) also support Debian 6, RHEL 6 and SLES 11.
@@ -125,8 +125,8 @@ Create a [Go workspace](http://golang.org/doc/code.html) by creating the `GOPATH
 
 Get the code and install Imposm:
 
-    go get github.com/omniscale/imposm3
-    go install github.com/omniscale/imposm3/cmd/imposm
+    go get github.com/kucjac/imposm3
+    go install github.com/kucjac/imposm3/cmd/imposm
 
 Done. You should now have an imposm binary in `$GOPATH/bin`.
 
@@ -194,9 +194,9 @@ For commercial support [contact Omniscale](http://omniscale.com/contact).
 Development
 -----------
 
-The source code is available at: <https://github.com/omniscale/imposm3/>
+The source code is available at: <https://github.com/kucjac/imposm3/>
 
-You can report any issues at: <https://github.com/omniscale/imposm3/issues>
+You can report any issues at: <https://github.com/kucjac/imposm3/issues>
 
 License
 -------

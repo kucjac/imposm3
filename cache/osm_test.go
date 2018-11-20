@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/omniscale/imposm3/element"
+	"github.com/kucjac/imposm3/element"
 )
 
 func TestCreateCache(t *testing.T) {

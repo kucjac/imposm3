@@ -1,7 +1,7 @@
 package binary
 
 import (
-	"github.com/omniscale/imposm3/element"
+	"github.com/kucjac/imposm3/element"
 )
 
 const COORD_FACTOR float64 = 11930464.7083 // ((2<<31)-1)/360.0
@@ -99,7 +99,7 @@ func UnmarshalRelation(data []byte) (relation *element.Relation, err error) {
 
 	relation = &element.Relation{}
 	relation.Members = make([]element.Member, len(pbfRelation.MemberIds))
-	for i, _ := range pbfRelation.MemberIds {
+	for i := range pbfRelation.MemberIds {
 		relation.Members[i].Id = pbfRelation.MemberIds[i]
 		relation.Members[i].Type = element.MemberType(pbfRelation.MemberTypes[i])
 		relation.Members[i].Role = pbfRelation.MemberRoles[i]
